@@ -107,7 +107,7 @@ def viewMarksPage(request, student_id):
     marks = MarkModel.objects.filter(student=student)
     total_credit = 0
     total_grade_point = 0
-
+    rounded_cgpa = 0
     for mark in marks:
         subject_credit = int(mark.subject.Credit) 
 
