@@ -1,0 +1,87 @@
+{% include "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Subjects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(182, 15, 15, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+        h1{
+            text-align: center;
+            color: #0c072c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>View Subjects</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Subject Code</th>
+                <th>Credit</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.SubjectName }}</td>
+                    <td>{{ subject.SubjectCode }}</td>
+                    <td>{{ subject.Credit }}</td>
+                
+                <td>
+                    <a href="{% url "edit_Subject" subject.id %}">Edit Page</a>
+                </td>
+                    <td>
+                    <a href="{% url "delete_Subject" subject.id %}">Delete Page</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+
+{% endblock content %}

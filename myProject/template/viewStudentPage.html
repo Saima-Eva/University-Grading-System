@@ -1,0 +1,101 @@
+{% include "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(182, 15, 15, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+        h1{
+            text-align: center;
+            color: #0c072c;
+        }
+      
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>View Students</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Subjects</th>
+                <th>Input Marks</th>
+                <th>view Marks</th>
+                <th>Edit Page</th>
+                <th>Delete Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student.StudentName }}</td>
+                    <td>{{ student.Age }}</td>
+                    <td>{{ student.get_Gender_display }}</td>
+                    <td>
+                        {% for subject in student.Subjects.all %}
+                            {{ subject.SubjectName }},
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url "inputMarksPage" student.id %}">Input Marks</a>
+                    </td>
+                        <td>
+                        <a href="{% url "viewMarksPage" student.id %}">View Marks</a>
+                    </td>
+                    <td>
+                        <a href="{% url "edit_student" student.id %}">Edit Page</a>
+                    </td>
+                    <td>
+                        <a href="{% url "delete_student" student.id %}">Delete Page</a>
+                    </td>
+                   
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+
+{% endblock content %}

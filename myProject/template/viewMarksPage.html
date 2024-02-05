@@ -1,0 +1,132 @@
+{% include "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Marks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(182, 15, 15, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+        h1{
+            text-align: center;
+            color: #0c072c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Marks for {{ student.StudentName }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Code</th>
+                <th>Subject Title</th>
+                <th>Credit</th>
+                <th>Marks</th>
+                <th>Grade</th>
+                <th>Grade Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks.all %}
+                <tr>
+                    <td>{{ mark.subject.SubjectCode }}</td>
+                    <td>{{ mark.subject.SubjectName }}</td>
+                    <td>{{ mark.subject.Credit }}</td>
+                    <td>{{ mark.marks }}</td>
+                    <td>
+                        {% if mark.marks >= 80 %}
+                            A+
+                        {% elif mark.marks >= 75 %}
+                            A
+                        {% elif mark.marks >= 70 %}
+                            A-
+                        {% elif mark.marks >= 65 %}
+                            B+
+                        {% elif mark.marks >= 60 %}
+                            B
+                        {% elif mark.marks >= 55 %}
+                            B-
+                        {% elif mark.marks >= 50 %}
+                            C+
+                        {% elif mark.marks >= 45 %}
+                            C
+                        {% elif mark.marks >= 40 %}
+                            D
+                        {% else %}
+                            F
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if mark.marks >= 80 %}
+                            4.00
+                        {% elif mark.marks >= 75 %}
+                            3.75
+                        {% elif mark.marks >= 70 %}
+                            3.50
+                        {% elif mark.marks >= 65 %}
+                            3.25
+                        {% elif mark.marks >= 60 %}
+                            3.00
+                        {% elif mark.marks >= 55 %}
+                            2.75
+                        {% elif mark.marks >= 50 %}
+                            2.50
+                        {% elif mark.marks >= 45 %}
+                            2.25
+                        {% elif mark.marks >= 40 %}
+                            2.00
+                        {% else %}
+                            0.00
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Total Credit is {{total_credit}}</h1>
+    <h1>Total Grade Point is {{total_grade_point}}</h1>
+    <h1>CGPA is {{cgpa}}</h1>
+</div>
+
+</body>
+</html>
+
+{% endblock content %}
+
+
